@@ -19,17 +19,34 @@ export default class app extends React.Component {
           onPress={this._pickImage}
         />
         <Button onPress={this._takePhoto} title="Take a photo" />
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        )}
+
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       </View>
     );
   }
 
   componentDidMount() {
     this.getPermissionAsync();
+    this.getProfilePhoto();
   }
 
+  getProfilePhoto = async () => {
+    fetch("https://b3c84cad.ngrok.io/getProfileImg", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "multipart/form-data",
+      },
+    }).then(response => {
+        console.log(response.url);
+      })
+      .catch(function(error) {
+        console.log(
+          "There has been a problem with your fetch operasdation: " +
+            error.message
+        );
+      });
+  };
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -84,7 +101,7 @@ async function uploadImageAsync(uri) {
     type: `image/${fileType}`,
   });
 
-  fetch("https://a9768ff6.ngrok.io/uploadphoto", {
+  fetch("https://b3c84cad.ngrok.io/uploadphoto", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -97,5 +114,5 @@ async function uploadImageAsync(uri) {
     );
   });
 
-  console.log(formData);
+  // console.log(formData);
 }
