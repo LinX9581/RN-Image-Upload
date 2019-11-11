@@ -105,7 +105,7 @@ app.post("/uploadphoto", function(req, res) {
             });
 
             var sql =
-                "INSERT INTO `imgurl`(`url`,`id`) VALUES ('https://593f5cd7.ngrok.io/uploads/profile/" + accountName + "/" + accountName + ".jpg','" + accountName + "')";
+                "INSERT INTO `imgurl`(`url`,`id`) VALUES ('https://1c2c33c5.ngrok.io/uploads/profile/" + accountName + "/" + accountName + ".jpg','" + accountName + "')";
 
             db.query(sql, function(err, result) {
                 console.log("inserted data");
