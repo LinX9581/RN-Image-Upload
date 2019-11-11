@@ -53,7 +53,7 @@ const storage = multer.diskStorage({
 // Init Upload
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 5000000 }, // 檔案大小限制500kb
+    limits: { fileSize: 100000000 }, // 檔案大小限制500kb
     fileFilter: function(req, file, cb) {
         checkFileType(file, cb);
     },
@@ -105,7 +105,7 @@ app.post("/uploadphoto", function(req, res) {
             });
 
             var sql =
-                "INSERT INTO `imgurl`(`url`,`id`) VALUES ('https://2ecc21b3.ngrok.io/uploads/profile/" + accountName + "/" + accountName + ".jpg','" + accountName + "')";
+                "INSERT INTO `imgurl`(`url`,`id`) VALUES ('https://593f5cd7.ngrok.io/uploads/profile/" + accountName + "/" + accountName + ".jpg','" + accountName + "')";
 
             db.query(sql, function(err, result) {
                 console.log("inserted data");
@@ -117,6 +117,8 @@ app.post("/uploadphoto", function(req, res) {
 app.get("/getProfileImg", function(req, res) {
     res.send("userProfileImgUrl");
 })
+
+
 app.post("/getProfileImg", function(req, res) {
     // console.log(req)
     console.log(req.body.account)

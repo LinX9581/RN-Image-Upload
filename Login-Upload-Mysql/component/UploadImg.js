@@ -21,16 +21,6 @@ export default class uploadImg extends React.Component {
     let { image } = this.state;
     let { userProfileImage } = this.state;
 
-    // const willFocusSubscription = this.props.navigation.addListener(
-    //     "UploadImg",
-    //     () => {
-
-    //         const thing = this.props.navigation.getParam("thing");
-    //         const thing2 = this.props.navigation.getParam("thing2");
-    //         this.setState({thing, thing2});
-    //         console.log(thing)
-    //     }
-    // );
     let username = this.props.navigation.state.params.name;
 
     return (
@@ -49,10 +39,10 @@ export default class uploadImg extends React.Component {
     );
   }
 
-
+  //進畫面就會先執行這個function  post getProfileImg 把使用者帳號丟給server
   getProfilePhoto = async () => {
     let username = this.props.navigation.state.params.name;
-    fetch("https://2ecc21b3.ngrok.io/getProfileImg", {
+    fetch("https://593f5cd7.ngrok.io/getProfileImg", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -135,7 +125,7 @@ async function uploadImageAsync(uri, username) {
 
   formData.append("account", username);
 
-  fetch("https://2ecc21b3.ngrok.io/uploadphoto", {
+  fetch("https://593f5cd7.ngrok.io/uploadphoto", {
     method: "POST",
     headers: {
       "Content-Type": "multipart/form-data",
